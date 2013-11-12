@@ -1,9 +1,14 @@
+/* declare Backbone and underscore variables so jshint doesn't error
+ * see http://www.jshint.com/docs/ 
+ */
+/* global Backbone */
+/* global _ */
+
 (function($, _, Backbone) {
 
     var recipes = [
         {
             title: 'Cake',
-            img: '',
             description: 'A lovely cake. Delicious!',
             serves: '8',
             time: '2 hours',
@@ -37,7 +42,6 @@
 
         {
             title: 'Rat Souffle',
-            img: '',
             description: 'Rat-flavoured souffle',
             serves: '1',
             time: '20 minutes',
@@ -83,7 +87,7 @@
 
     var Recipe = Backbone.Model.extend({
         defaults: {
-            img: 'img/placeholder.png'
+            img: 'img/placeholder.jpg'
         }
     });
 
@@ -140,6 +144,6 @@
     });
 
 
-    var recipeBook = new RecipeBookView();
+    new RecipeBookView();
 
 }(jQuery, _, Backbone));
