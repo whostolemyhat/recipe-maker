@@ -85,6 +85,24 @@
     });
 
 
+    var User = Backbone.Model.extend({
+        defaults: {
+            id: '0',
+            name: 'Guest'
+        }
+    });
+
+    var UserView = Backbone.View.extend({
+        template: $('#userTemplate').html(),
+
+        render: function() {
+            var tmpl = _.template(this.template);
+            this.$el.html(tmpl(this.model.toJSON()));
+            return this;
+        }
+    });
+
+
     var Recipe = Backbone.Model.extend({
         defaults: {
             img: 'img/placeholder.jpg'
@@ -98,6 +116,7 @@
 
         initialize: function() {
             this.collection = new IngredientList(this.model.get('ingredients'));
+            this.user = new User(this.model.get('user'));
         },
 
         render: function() {
@@ -110,6 +129,11 @@
                 });
                 this.$el.find('ul').append(ingredientView.render().el);
             }, this);
+
+            var userView = new UserView({
+                model: this.user
+            });
+            userView.render().$el.insertBefore(this.$el.find('.description'));
 
             return this;
         }

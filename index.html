@@ -24,8 +24,8 @@
         </div>
 
         <script id="recipeTemplate" type="text/template">
-            <img src="<%= img %>" alt="<%= title %>" />
             <h1><%= title %></h1>
+            <img src="<%= img %>" alt="<%= title %>" />
             <p class="description"><%= description %></p>
             <span class="servings">Serves: <%= serves %></span>
             <span class="cooking-time">Cooking time: <%= time %></span>
@@ -35,6 +35,12 @@
 
         <script type="text/template" id="ingredientTemplate">
             <li class="ingredient"><%= quantity %><%= unit %> <%= name %></li>
+        </script>
+
+        <script type="text/template" id="userTemplate">
+            <span class="user">
+                <a href="#"><%= name %></a>
+            </span>
         </script>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
