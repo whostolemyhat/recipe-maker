@@ -2,11 +2,12 @@
 
 module.exports = function(grunt) {
     grunt.initConfig({
+        app: 'app', // path to app files
         pkg: grunt.file.readJSON('package.json'),
 
         watch: {
             compass: {
-                files: ['sass/*.scss'],
+                files: ['<%= app %>/sass/*.scss'],
                 tasks: ['compass:server']
             },
 
@@ -15,19 +16,19 @@ module.exports = function(grunt) {
                     livereload: '<%= connect.options.livereload %>'
                 },
                 files: [
-                    '*.html',
-                    'js/*.js',
-                    'css/*.css',
-                    'img/*.{gif,jpg,jpeg,png,svg,webp}'
+                    '<%= app %>/*.html',
+                    '<%= app %>/js/*.js',
+                    '<%= app %>/css/*.css',
+                    '<%= app %>/img/*.{gif,jpg,jpeg,png,svg,webp}'
                 ]
             }
         },
 
         compass: {
             options: {
-                sassDir: 'sass',
-                cssDir: 'css',
-                config: 'config.rb'
+                sassDir: '<%= app %>/sass',
+                cssDir: '<%= app %>/css',
+                config: '<%= app %>/config.rb'
             },
             server: {
                 options: {
@@ -43,7 +44,7 @@ module.exports = function(grunt) {
             },
             all: [
                 'Gruntfile.js',
-                'js/*.js'
+                '<%= app %>/js/*.js'
             ]
         },
 
@@ -52,13 +53,13 @@ module.exports = function(grunt) {
                 options: {
                     import: 2
                 },
-                src: ['css/*.css']
+                src: ['<%= app %>/css/*.css']
             },
             lax: {
                 options: {
                     import: false
                 },
-                src: ['css/*.css']
+                src: ['<%= app %>/css/*.css']
             }
         },
 
@@ -71,7 +72,7 @@ module.exports = function(grunt) {
             livereload: {
                 options: {
                     open: true,
-                    base: ['.']
+                    base: ['<%= app %>']
                 }
             }
         }
@@ -85,5 +86,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-csslint');
 
     grunt.registerTask('serve', ['jshint', 'connect:livereload', 'watch']);
-    grunt.registerTask('default', ['jshint']);
+    grunt.registerTask('default', ['jshint', 'csslint:lax']);
 };

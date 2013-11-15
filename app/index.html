@@ -19,12 +19,19 @@
         <![endif]-->
         <div class="container">
             <h1>Recipe</h1>
-            <div id="recipes"></div>
+
+            <div id="recipes">
+                <div class="filter hidden">
+                    <p></p>
+                    <a href="/all" class="clear-filter" data-id="all">See all</a>
+                </div>
+
+            </div>
             
         </div>
 
         <script id="recipeTemplate" type="text/template">
-            <h1><%= title %></h1>
+            <h1><a href="/recipe/<%= id %>" data-id="<%= id %>" class="recipe"><%= title %></a></h1>
             <img src="<%= img %>" alt="<%= title %>" />
             <p class="description"><%= description %></p>
             <span class="servings">Serves: <%= serves %></span>
@@ -39,7 +46,7 @@
 
         <script type="text/template" id="userTemplate">
             <span class="user">
-                <a href="#"><%= name %></a>
+                <a href="/user/<%= id %>" data-id="<%= id %>"><%= name %></a>
             </span>
         </script>
 

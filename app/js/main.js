@@ -6,8 +6,10 @@
 
 (function($, _, Backbone) {
 
+    // JSON - this would be from server
     var recipes = [
         {
+            id: '1',
             title: 'Cake',
             description: 'A lovely cake. Delicious!',
             serves: '8',
@@ -41,6 +43,7 @@
         },
 
         {
+            id: '2',
             title: 'Rat Souffle',
             description: 'Rat-flavoured souffle',
             serves: '1',
@@ -58,6 +61,36 @@
             user: {
                 id: '6',
                 name: 'Archibald'
+            }
+        },
+
+        {
+            id: '3',
+            title: 'Delicious Popcorn',
+            img: 'img/popcorn.jpg',
+            description: 'Covered in lovely things',
+            serves: '6',
+            time: '10 minutes',
+            ingredients: [
+                {
+                    name: 'corn',
+                    quantity: 'lots of'
+                },
+
+                {
+                    name: 'gin',
+                    quantity: 'some'
+                },
+
+                {
+                    name: 'chilli powder',
+                    quantity: 'lashings'
+                }
+            ],
+            method: '<p>Add some oil to a pan and fry the corn until popped.</p><p>Add the toppings to taste.</p>',
+            user: {
+                id: '1',
+                name: 'James'
             }
         }
     ];
@@ -149,6 +182,13 @@
         initialize: function() {
             this.collection = new RecipeBook(recipes);
             this.render();
+            this.on('change:userFilter', function() {
+                this.filterByUser();
+            }, this);
+            this.on('change:recipeFilter', function() {
+                this.filterByRecipe();
+            }, this);
+            this.collection.on('reset', this.render, this);
         },
 
         render: function() {
@@ -164,10 +204,93 @@
                 model: recipe
             });
             this.$el.append(recipeView.render().el);
+        },
+
+        events: {
+            'click .user a': 'setFilter',
+            'click .clear-filter': 'setFilter',
+            'click .recipe': 'setRecipeFilter'
+        },
+
+        // TODO: clean up filtering
+        // keep user and recipe separate but remove duplicated code
+        setFilter: function(e) {
+            e.preventDefault();
+            this.userFilter = $(e.currentTarget).data('id');
+            this.trigger('change:userFilter');
+        },
+
+        filterByUser: function() {
+            if(this.userFilter === 'all') {
+                $('.filter').addClass('hidden');
+                this.collection.reset(recipes);
+                recipeRouter.navigate('all');
+            } else {
+                this.collection.reset(recipes, { silent: true });
+
+                var filterId = '' +this.userFilter;
+                var filtered = _.filter(this.collection.models, function(item) {
+                    var user = item.get('user');
+                    if(user.id === filterId) {
+                        $('.filter p').text('Showing all recipes from ' + user.name);
+                    }
+                    return user.id === filterId;
+                });
+
+                this.collection.reset(filtered);
+                recipeRouter.navigate('user/' + filterId);
+                $('.filter').removeClass('hidden');
+            }
+        },
+
+        setRecipeFilter: function(e) {
+            e.preventDefault();
+            this.recipeFilter = $(e.currentTarget).data('id');
+            this.trigger('change:recipeFilter');
+        },
+
+        filterByRecipe: function() {
+            if(this.recipeFilter === 'all') {
+                $('.filter').addClass('hidden');
+                this.collection.reset(recipes);
+                recipeRouter.navigate('all');
+            } else {
+                this.collection.reset(recipes, { silent: true });
+
+                var filterId = '' + this.recipeFilter;
+                var filtered = _.filter(this.collection.models, function(item) {
+                    return item.get('id') === filterId;
+                });
+
+                this.collection.reset(filtered);
+                recipeRouter.navigate('recipe/' + filterId);
+                $('.filter p').text('');
+                $('.filter').removeClass('hidden');
+            }
         }
     });
 
 
-    new RecipeBookView();
+    var recipeBookView = new RecipeBookView();
+
+    var RecipeRouter = Backbone.Router.extend({
+        routes: {
+            'user/:id': 'userFilter',
+            'recipe/:id': 'recipeFilter'
+        },
+
+        userFilter:function(id) {
+            recipeBookView.userFilter = id;
+            recipeBookView.trigger('change:userFilter');
+        },
+
+        recipeFilter:function(id) {
+            recipeBookView.recipeFilter = id;
+            recipeBookView.trigger('change:recipeFilter');
+        }
+    });
+
+    var recipeRouter = new RecipeRouter();
+    Backbone.history.start();
 
 }(jQuery, _, Backbone));
