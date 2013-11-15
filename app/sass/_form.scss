@@ -1,0 +1,35 @@
+form {
+    width: 100%;
+
+    img {
+        width: 100px;
+        float: left;
+    }
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"] {
+    width: 100%;
+    margin: 0.5rem 0;
+}
+
+.edit-ingredient {
+    .quantity {
+        width: 25%;
+        float: left;
+    }
+
+    .ingredient {
+        width: 65%;
+        margin-left: 5%;
+    }
+}
+
+textarea {
+    height: 100px;
+    width: 100%;
+    margin: 0.5rem 0;
+}

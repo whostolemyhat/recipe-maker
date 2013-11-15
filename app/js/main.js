@@ -84,7 +84,7 @@
 
                 {
                     name: 'chilli powder',
-                    quantity: 'lashings'
+                    quantity: 'lashings of'
                 }
             ],
             method: '<p>Add some oil to a pan and fry the corn until popped.</p><p>Add the toppings to taste.</p>',
@@ -101,6 +101,7 @@
             quantity: '1',
             unit: ''
         }
+
     });
 
     var IngredientList = Backbone.Collection.extend({
@@ -109,6 +110,7 @@
 
     var IngredientView = Backbone.View.extend({
         template: $('#ingredientTemplate').html(),
+        editTemplate: _.template($('#editIngredientTemplate').html()),
 
         render: function() {
             var tmpl = _.template(this.template);
@@ -146,10 +148,17 @@
         tagName: 'article',
         className: 'recipe-container',
         template: $('#recipeTemplate').html(),
+        editTemplate: _.template($('#editRecipeTemplate').html()),
 
         initialize: function() {
             this.collection = new IngredientList(this.model.get('ingredients'));
             this.user = new User(this.model.get('user'));
+        },
+
+        events: {
+            'click .edit': 'editRecipe',
+            'click .save': 'saveEdit',
+            'click .cancel': 'cancelEdit'
         },
 
         render: function() {
@@ -166,10 +175,70 @@
             var userView = new UserView({
                 model: this.user
             });
-            userView.render().$el.insertBefore(this.$el.find('.description'));
+            userView.render().$el.insertAfter(this.$el.find('h1'));
 
             return this;
+        },
+
+        editRecipe: function(e) {
+            e.preventDefault();
+            this.$el.html(this.editTemplate(this.model.toJSON()));
+            _.each(this.collection.models, function(item) {
+                var ingredientView = new IngredientView({
+                    model: item
+                });
+                this.$el.find('form .edit-ingredient').append(ingredientView.editTemplate(ingredientView.model.toJSON()));
+            }, this);
+        },
+
+        saveEdit: function(e) {
+            e.preventDefault();
+            var formData = {};
+            var ingredientData = [];
+            var prev = this.model.previousAttributes();
+
+            $(e.target).closest('form').find('.ingredient-info').each(function() {
+                var ingredient = {
+                    quantity: $(this).find('.quantity').val(),
+                    name: $(this).find('.ingredient').val()
+                };
+                ingredientData.push(ingredient);
+            });
+            console.log(ingredientData);
+
+            // ingredients handled separately
+            $(e.target).closest('form').find('input, textarea').filter(function() {
+                return $(this).parents('.edit-ingredient').length < 1;
+            }).each(function() {
+                var el = $(this);
+                formData[el.attr('name')] = el.val();
+            });
+
+            if(formData.img === '') {
+                delete formData.img;
+            }
+            if(prev.img === '/img/placeholder.jpg') {
+                delete prev.img;
+            }
+            console.log(this.model.get('ingredients'));
+            _.each(this.model.get('ingredients'), function(item) {
+                // if(item.name === ) {}
+            });
+            this.model.set(formData);
+            this.render();
+
+            _.each(recipes, function(recipe) {
+                if(_.isEqual(recipe, prev)) {
+                    recipes.splice(_.indexOf(recipes, recipe), 1, formData);
+                }
+            });
+        },
+
+        cancelEdit: function(e) {
+            e.preventDefault();
+            this.render();
         }
+
     });
 
     var RecipeBook = Backbone.Collection.extend({
@@ -267,11 +336,9 @@
                 $('.filter p').text('');
                 $('.filter').removeClass('hidden');
             }
-        }
+        },
+
     });
-
-
-    var recipeBookView = new RecipeBookView();
 
     var RecipeRouter = Backbone.Router.extend({
         routes: {
@@ -290,6 +357,7 @@
         }
     });
 
+    var recipeBookView = new RecipeBookView();
     var recipeRouter = new RecipeRouter();
     Backbone.history.start();
 

@@ -414,45 +414,18 @@ table {
   border-spacing: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/main\.scss}line{font-family:\000037}}
-html,
-button,
-input,
-select,
-textarea {
-  color: #222;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/main\.scss}line{font-family:\0000311}}
-html {
-  font-size: 1em;
-  line-height: 1.4;
-  font-family: 'Open Sans', Arial, sans-serif;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/main\.scss}line{font-family:\0000317}}
-.container {
-  margin: auto;
-  max-width: 1200px;
-}
-
-@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/main\.scss}line{font-family:\0000322}}
-.hidden {
-  display: none;
-}
-
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection rule sets have to be separate.
  * Customize the background color to match your design.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/main\.scss}line{font-family:\0000332}}
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_normalise\.scss}line{font-family:\00003416}}
 ::-moz-selection {
   background: #b3d4fc;
   text-shadow: none;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/main\.scss}line{font-family:\0000337}}
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_normalise\.scss}line{font-family:\00003421}}
 ::selection {
   background: #b3d4fc;
   text-shadow: none;
@@ -461,7 +434,7 @@ html {
 /*
  * A better looking default horizontal rule
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/main\.scss}line{font-family:\0000346}}
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_normalise\.scss}line{font-family:\00003430}}
 hr {
   display: block;
   height: 1px;
@@ -475,7 +448,7 @@ hr {
  * Remove the gap between images, videos, audio and canvas and the bottom of
  * their containers: h5bp.com/i/440
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/main\.scss}line{font-family:\0000363}}
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_normalise\.scss}line{font-family:\00003447}}
 audio,
 canvas,
 img,
@@ -486,14 +459,14 @@ video {
 /*
  * Remove default fieldset styles.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/main\.scss}line{font-family:\0000371}}
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_normalise\.scss}line{font-family:\00003455}}
 fieldset {
   border: 0;
   margin: 0;
   padding: 0;
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/main\.scss}line{font-family:\0000378}}
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_normalise\.scss}line{font-family:\00003462}}
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -501,7 +474,84 @@ fieldset {
   padding: 0.2em 0;
 }
 
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_body\.scss}line{font-family:\000031}}
+html {
+  font-size: 1em;
+  line-height: 1.4;
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 62.5%;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_body\.scss}line{font-family:\0000312}}
+html,
+button,
+input,
+select,
+textarea {
+  color: #222;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_body\.scss}line{font-family:\0000316}}
+body {
+  font-size: 1.6rem;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_body\.scss}line{font-family:\0000320}}
+.container {
+  margin: auto;
+  max-width: 1200px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_body\.scss}line{font-family:\0000325}}
+article {
+  width: 500px;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_form\.scss}line{font-family:\000031}}
+form {
+  width: 100%;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_form\.scss}line{font-family:\000034}}
+form img {
+  width: 100px;
+  float: left;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_form\.scss}line{font-family:\0000310}}
+label {
+  font-weight: bold;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_form\.scss}line{font-family:\0000314}}
+input[type="text"] {
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_form\.scss}line{font-family:\0000320}}
+.edit-ingredient .quantity {
+  width: 25%;
+  float: left;
+}
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_form\.scss}line{font-family:\0000325}}
+.edit-ingredient .ingredient {
+  width: 65%;
+  margin-left: 5%;
+}
+
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_form\.scss}line{font-family:\0000331}}
+textarea {
+  height: 100px;
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
 /* Helpers */
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_helpers\.scss}line{font-family:\000035}}
+.hidden {
+  display: none;
+}
+
 /*
  * Clearfix: contain floats
  *
@@ -513,7 +563,7 @@ fieldset {
  * 2. The use of `table` rather than `block` is only necessary if using
  *    `:before` to contain the top-margins of child elements.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/main\.scss}line{font-family:\00003103}}
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_helpers\.scss}line{font-family:\0000323}}
 .clearfix:before,
 .clearfix:after {
   content: " ";
@@ -522,7 +572,7 @@ fieldset {
   /* 2 */
 }
 
-@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/main\.scss}line{font-family:\00003108}}
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_helpers\.scss}line{font-family:\0000328}}
 .clearfix:after {
   clear: both;
 }
@@ -531,7 +581,7 @@ fieldset {
  * For IE 6/7 only
  * Include this rule to trigger hasLayout and contain floats.
  */
-@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/main\.scss}line{font-family:\00003117}}
+@media -sass-debug-info{filename{font-family:file\:\/\/H\:\/recipe\/app\/sass\/_helpers\.scss}line{font-family:\0000337}}
 .clearfix {
   *zoom: 1;
 }

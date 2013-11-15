@@ -32,6 +32,7 @@
 
         <script id="recipeTemplate" type="text/template">
             <h1><a href="/recipe/<%= id %>" data-id="<%= id %>" class="recipe"><%= title %></a></h1>
+            <p><a href="/recipe/<%= id %>/edit" data-id="<%= id %>" class="edit">Edit</a></p>
             <img src="<%= img %>" alt="<%= title %>" />
             <p class="description"><%= description %></p>
             <span class="servings">Serves: <%= serves %></span>
@@ -39,14 +40,39 @@
             <ul class="ingredients"></ul>
             <p class="method"><%= method %></p>
         </script>
+        <script id="editRecipeTemplate" type="text/template">
+            <form action="#" method="post">
+                <img src="<%= img %>" />
+                <input type="file" name="img" value="<%= img %>" />
+                <input type="text" name="title" value="<%= title %>" />
+                <textarea name="description"><%= description %></textarea>
+                <input type="text" name="servings" value="<%= serves %>" />
+                <input type="text" name="cooking-time" value="<%= time %>" />
+
+                <div class="edit-ingredient"></div>
+
+
+                <textarea name="method"><%= method %></textarea>
+
+                <button class="save">Save</button>
+                <button class="cancel">Cancel</button>
+            </form>
+        </script>
 
         <script type="text/template" id="ingredientTemplate">
             <li class="ingredient"><%= quantity %><%= unit %> <%= name %></li>
         </script>
 
+        <script type="text/template" id="editIngredientTemplate">
+            <div class="ingredient-info">
+                <input type="text" value="<%= quantity %>" name="quantity-<%= name %>" class="quantity" />
+                <input type="text" value="<%= name %>" name="<%= name %>" class="ingredient" />
+            </div>
+        </script>
+
         <script type="text/template" id="userTemplate">
             <span class="user">
-                <a href="/user/<%= id %>" data-id="<%= id %>"><%= name %></a>
+                Created by <a href="/user/<%= id %>" data-id="<%= id %>"><%= name %></a>
             </span>
         </script>
 
