@@ -114,6 +114,7 @@
 
         render: function() {
             var tmpl = _.template(this.template);
+            console.log(this.model);
             this.$el.html(tmpl(this.model.toJSON()));
             return this;
         }
@@ -138,7 +139,7 @@
     });
 
 
-    var Recipe = Backbone.Model.extend({
+    var Recipe = Backbone.DeepModel.extend({
         defaults: {
             img: 'img/placeholder.jpg'
         }
@@ -204,10 +205,9 @@
                 };
                 ingredientData.push(ingredient);
             });
-            console.log(ingredientData);
 
             // ingredients handled separately
-            $(e.target).closest('form').find('input, textarea').filter(function() {
+            $(e.target).parents('form').find('input, textarea').filter(function() {
                 return $(this).parents('.edit-ingredient').length < 1;
             }).each(function() {
                 var el = $(this);
@@ -220,13 +220,15 @@
             if(prev.img === '/img/placeholder.jpg') {
                 delete prev.img;
             }
-            console.log(this.model.get('ingredients'));
-            _.each(this.model.get('ingredients'), function(item) {
-                // if(item.name === ) {}
-            });
+
             this.model.set(formData);
+            this.model.set('ingredients', ingredientData);
+            // must be a better way!
+            this.collection = new IngredientList(this.model.get('ingredients'));
+
             this.render();
 
+            // save to server
             _.each(recipes, function(recipe) {
                 if(_.isEqual(recipe, prev)) {
                     recipes.splice(_.indexOf(recipes, recipe), 1, formData);

@@ -42,16 +42,26 @@
         </script>
         <script id="editRecipeTemplate" type="text/template">
             <form action="#" method="post">
-                <img src="<%= img %>" />
-                <input type="file" name="img" value="<%= img %>" />
+                <div class="clearfix img-container">
+                    <img src="<%= img %>" />
+                    <input type="file" name="img" value="<%= img %>" />
+                </div>
+                <label for="title">Title</label>
                 <input type="text" name="title" value="<%= title %>" />
+
+                <label for="description">Description</label>
                 <textarea name="description"><%= description %></textarea>
+
+                <label for="servings">Serves</label>
                 <input type="text" name="servings" value="<%= serves %>" />
+                
+                <label for="cooking-time">Cooking time</label>
                 <input type="text" name="cooking-time" value="<%= time %>" />
 
+                <label>Ingredients</label>
                 <div class="edit-ingredient"></div>
 
-
+                <label>Method</label>
                 <textarea name="method"><%= method %></textarea>
 
                 <button class="save">Save</button>
@@ -80,6 +90,7 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         <script src="js/vendor/underscore-min.js"></script>
         <script src="js/vendor/backbone-min.js"></script>
+        <script src="js/vendor/deep-model.min.js"></script>
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
 
